@@ -1,4 +1,4 @@
-# Kafka Lab Project – User Producer / Consumer Microservices
+# Kafka Project – User Producer / Consumer Microservices
 
 ![CI/CD](https://github.com/LesieBarbie/kafka-lab/actions/workflows/deploy.yaml/badge.svg)
 
