@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: Deploy with Helm on KinD
 
 on:
   push:
@@ -8,28 +8,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v3
+      - name: Set up KinD (Kubernetes in Docker)
+        uses: helm/kind-action@v1.5.0
         with:
-          version: 'latest'
+          version: v0.20.0
 
-      - name: Setup Helm
+      - name: Set up Helm
         uses: azure/setup-helm@v3
         with:
-          version: 'latest'
+          version: v3.13.3
 
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > ~/.kube/config
-
-      - name: Deploy Helm chart
-        run: |
-          helm upgrade --install user-apps ./helm-chart
+      - name: Deploy with Helm
+        run: helm upgrade --install user-apps ./helm-chart
