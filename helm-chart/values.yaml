@@ -1,0 +1,2 @@
+producerImage: lesiebarbie/user-producer:latest
+consumerImage: lesiebarbie/user-consumer:latest

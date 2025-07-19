@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-producer
+  template:
+    metadata:
+      labels:
+        app: user-producer
+    spec:
+      containers:
+        - name: user-producer
+          image: {{ .Values.producerImage }}
+          ports:
+            - containerPort: 8080

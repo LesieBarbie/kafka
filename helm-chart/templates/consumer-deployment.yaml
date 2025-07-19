@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-consumer
+  template:
+    metadata:
+      labels:
+        app: user-consumer
+    spec:
+      containers:
+        - name: user-consumer
+          image: {{ .Values.consumerImage }}
+          ports:
+            - containerPort: 8080
